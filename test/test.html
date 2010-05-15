@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>    
+    <title>Test</title>
+    <style>
+    body { background: #000; color: #fff; font-family: verdana, sans-serif; text-align: center; padding: 20px; }
+    a, a:visited { color: #fff; font-weight: bold; background: #0f67a1; padding: 5px; text-decoration: none; }
+    #logo { display: block; margin: 20px auto; }
+    li { list-style: none; }
+    </style>
+    <script src="../barebones.jquery.js"></script>
+    <script>   
+    $(function() {
+        $('#hidelink').click(function() {
+            $('#logo').hide();
+            return false;    
+        });
+        $('#showlink').click(function() {
+            $('#logo').show();
+            return false;    
+        });
+        var lis = $('li');
+        lis.click(function() {
+            alert(this.innerHTML);    
+        });
+    });    
+    </script>
+</head>
+<body>
+    <img id="logo" src="jQuery_logo_color_ondark.png" alt="" />
+    <p><a href="http://www.jquery.com/" id="hidelink">Hide</a> <a href="http://www.jquery.com/" id="showlink">Show</a></p>
+    <ul>
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+    </ul>    
+</body>
+</html>
