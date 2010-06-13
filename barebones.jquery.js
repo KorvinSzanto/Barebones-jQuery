@@ -7,6 +7,8 @@ jQuery.prototype = {
     init: function(selector) {
         if(typeof selector === "function") {
             window.onload = selector;
+	    this[0] = document;
+	    this.length = 1;
         } else if(selector) {
             if (/^\w+$/.test(selector)) { // tagname
 		selector = document.getElementsByTagName(selector);
@@ -48,4 +50,4 @@ jQuery.fn.show = function() {
 };
 jQuery.fn.click = function(fn) {
     return jQuery.each( this, function() { this.onclick = fn; } );   
-}
+};
