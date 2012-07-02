@@ -31,6 +31,9 @@ jQuery.each = function(object, callback) {
     }
     return object;
 }
+jQuery.trim = trim ?
+function(text){return text==null?"":trim.call(text);}:
+function(text){return text==null?"":text.toString().replace(/^\s+/,"").replace(/\s+$/,"");};
 jQuery.merge = function(first, second) {
     var i = first.length,
     j = 0;
@@ -50,4 +53,40 @@ jQuery.fn.show = function() {
 };
 jQuery.fn.click = function(fn) {
     return jQuery.each( this, function() { this.onclick = fn; } );   
+};
+jQuery.fn.addClass = function( value ) {
+    var classNames, i, l, elem,
+        setClass, c, cl;
+
+    if ( jQuery.isFunction( value ) ) {
+        return this.each(function( j ) {
+            jQuery( this ).addClass( value.call(this, j, this.className) );
+        });
+    }
+
+    if ( value && typeof value === "string" ) {
+        classNames = value.split( core_rspace );
+
+        for ( i = 0, l = this.length; i < l; i++ ) {
+            elem = this[ i ];
+
+            if ( elem.nodeType === 1 ) {
+                if ( !elem.className && classNames.length === 1 ) {
+                    elem.className = value;
+
+                } else {
+                    setClass = " " + elem.className + " ";
+
+                    for ( c = 0, cl = classNames.length; c < cl; c++ ) {
+                        if ( !~setClass.indexOf( " " + classNames[ c ] + " " ) ) {
+                            setClass += classNames[ c ] + " ";
+                        }
+                    }
+                    elem.className = jQuery.trim( setClass );
+                }
+            }
+        }
+    }
+
+    return this;
 };
